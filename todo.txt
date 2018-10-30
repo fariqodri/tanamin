@@ -1,0 +1,19 @@
+PREPROCESSING PHASE:
+  1. Dapet data
+  2. Data nya harus di scale supaya ngitungnya cepet
+
+MAIN PHASE:
+  1. Bikin objects:
+    - Province(name: string, luas: int, color: Color=None)
+    - Graph (jadi constraint graph): dict of Province
+    - Color(hex: str, crop: str)
+  2. Bikin database model:
+    - Nama, luas
+  3. Bikin algoritma untuk arc consistency (constraint propagation)
+  4. Bikin algorithm untuk backtrack search
+.
+.
+.
+.
+.
+.
