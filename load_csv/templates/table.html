@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h3>CSV berhasil di-load ke database</h3>
+  <table class="table">
+    <thead>
+      <th scope="col">Nama Provinsi</th>
+      <th scope="col">Luas Provinsi (Standard Score)</th>
+    </thead>
+    <tbody>
+      {% for data in data_provinsi %}
+        <tr>
+          <td>{{data.0}}</td>
+          <td>{{data.1}}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
