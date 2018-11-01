@@ -13,9 +13,11 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url
+from django.urls import path, include
 from django.contrib import admin
+import load_csv.urls as load_csv
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
+    path('admin/', admin.site.urls),
+    path('load-csv/', include(load_csv)),
 ]
