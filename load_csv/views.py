@@ -3,10 +3,10 @@ import csv, os
 from functools import reduce
 import math
 from .models import Province
+from tanamin.settings import BASE_DIR
 
 # Create your views here.
 def load(request):
-  BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
   Province.objects.all().delete()
   with open(os.path.join(BASE_DIR, 'data.csv')) as csv_file:
     csv_reader = csv.reader(csv_file, delimiter=';')
