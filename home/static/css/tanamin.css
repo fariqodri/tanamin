@@ -9,7 +9,7 @@
 .jumbotron{
     height: 100vh;
     background-color: black;
-    background-image: url('./img/sawah.jpg');
+    background-image: url('/static/img/sawah.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;

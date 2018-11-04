@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/tanamin.css' %}">
+{% endblock %}
+{% block content %}
+    <section class="jumbotron" id="home">
+        <div class="container cards">
+            <div class="text-center py-5 px-4 my-5">
+                <div>
+                    <h2 class="display-1 h1-responsive pt-3 mb-5 font-bold"><strong>Tanamin</strong></h2>
+                    <button class="btn btn-dark">
+                        <a href="#map" style="text-decoration: none; color:white">
+                            Coba!
+                        </a>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="map" id="map">
+        <div class="container-map">
+            <h1>Peta Persebaran Pangan Indonesia - <em>tanamin</em></h1>
+            <div id="geochart" style="width: 100%;"></div>
+            <br>
+            <br>
+            <div class="card">
+                <h5 class="card-header">Form Input User</h5>
+                <div class="card-body">
+                    <form>
+                        <div class="form-row">
+                            <div class="col-md-3">
+                                <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Jumlah Jenis Tanaman, trus
+                                    input satu-satu</label>
+                                <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
+                                    <option selected>Pilih...</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                </select>
+                            </div>
+                            <div style="text-align: center;" class="col-md-3">
+                                atau gini?
+                            </div>
+                            <div class="col-md-6">
+                                <small class="form-text text-muted">
+                                    format: [Jumlah Jenis Tanaman]_[Jenis Tanaman 1]_[Jenis Tanaman n]
+                                </small>
+                                <small class="form-text text-muted">
+                                    contoh: 4_padi_tebu_jagung_teh
+                                </small>
+                                <input type="text" id="hmm" class="form-control" required>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary my-1">Submit</button>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <br>
+    <footer id="myFooter" style="text-align:center">
+        <p>© tanamin SCBD </p>
+    </footer>
+    <!-- Geo Chart -->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript" src="{% static 'js/geochart.js' %}"></script>
+{% endblock %}
