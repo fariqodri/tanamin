@@ -18,14 +18,13 @@ def load(request):
     areas = [int(province[1]) for province in provinces]
     names = [province[0] for province in provinces]
     neighbors = [province[2] for province in provinces]
-
-    min_maxed = min_max_scaling(areas)
-    province_with_areas = [[names[i], min_maxed[i], neighbors[i]] for i in range(len(areas))]
     
+    province_with_areas = [[names[i], areas[i], neighbors[i]] for i in range(len(areas))]
+    province_with_areas.sort(key=lambda x: x[1], reverse=True)
+
     for name, area, neighbors in province_with_areas:
       pro = Province(name=name, area=area)
       pro.save()
-    
     for name, area, neighbors in province_with_areas:
       print(neighbors.split(", "))
       for ngbr_name in neighbors.split(", "):
@@ -39,8 +38,3 @@ def load(request):
         conn_obj.save()
 
   return render(request, "table.html", {"data_provinsi": province_with_areas})
-    
-
-def min_max_scaling(numbers):
-  min_max = [(x - min(numbers))/(max(numbers) - min(numbers)) for x in numbers]
-  return min_max

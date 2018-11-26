@@ -27,25 +27,9 @@
             <div class="card">
                 <h5 class="card-header">Form Input User</h5>
                 <div class="card-body">
-                    <form>
+                    <form action="{% url 'home:submit_tanaman' %}" method="POST">
+                        {% csrf_token %}
                         <div class="form-row">
-                            <div class="col-md-3">
-                                <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Jumlah Jenis Tanaman, trus
-                                    input satu-satu</label>
-                                <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
-                                    <option selected>Pilih...</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                    <option value="6">6</option>
-                                    <option value="7">7</option>
-                                    <option value="8">8</option>
-                                </select>
-                            </div>
-                            <div style="text-align: center;" class="col-md-3">
-                                atau gini?
-                            </div>
                             <div class="col-md-6">
                                 <small class="form-text text-muted">
                                     format: [Jumlah Jenis Tanaman]_[Jenis Tanaman 1]_[Jenis Tanaman n]
@@ -53,12 +37,11 @@
                                 <small class="form-text text-muted">
                                     contoh: 4_padi_tebu_jagung_teh
                                 </small>
-                                <input type="text" id="hmm" class="form-control" required>
+                                <label for="tanaman">Jumlah dan Jenis Tanaman <small>(minimal 4 jenis tanaman)</small></label>
+                                <input type="text" id="tanaman" class="form-control" name="tanamans" required>
                             </div>
                         </div>
-
                         <button type="submit" class="btn btn-primary my-1">Submit</button>
-
                     </form>
                 </div>
             </div>

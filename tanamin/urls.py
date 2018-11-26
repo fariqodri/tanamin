@@ -21,5 +21,5 @@ import home.urls as home
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('load-csv/', include(load_csv)),
-    re_path(r'^', include(home))
+    re_path(r'^', include(home, namespace="home"))
 ]
