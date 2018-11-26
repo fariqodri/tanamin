@@ -19,7 +19,7 @@ class Province:
 		return self.name
 
 	def __repr__(self):
-		return self.name, self.color
+		return self.name
 
 	def __eq__(self, other):
 		if isinstance(other, self.__class__):
