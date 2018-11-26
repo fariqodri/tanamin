@@ -8,3 +8,12 @@ class Color:
 
 	def __repr__(self):
 		return self.plant
+
+	def __eq__(self, other):
+		if isinstance(other, self.__class__):
+			return self.plant == other.plant
+		else:
+			return False
+	
+	def __hash__(self):
+		return hash(self.plant)

@@ -6,9 +6,11 @@ class LocalSearch:
 		self.csp = csp
 	
 	def check_solution(self, current):
-		for edge in current:
-			if edge[0].get_color() == edge[1].get_color():
-				return False
+		for province in current:
+			curr = self.csp.graph.graph[province]
+			for neigh in curr:
+				if neigh.color == curr.color:
+					return False
 		return True
 	
 	def conflicts(self, variable, value, current):
@@ -34,20 +36,15 @@ class LocalSearch:
 			color_area.append([i, area_divided])
 		for province in province_list:
 			color_area.sort(key=lambda x: x[1], reverse=True)
-			# for color, area in color_area:
 			color, area = color_area[0]
-			# print(province.name, color_area)
 			province.set_color(color)
 			color_area[0][1] -= province.area
-					# break
-
-		# luass = {'padi': 0, 'tebu': 0, 'teh': 0, 'jagung': 0}
-		for province in province_list:
-			# luass[province.color.plant] += province.area
-			print(province.name, province.color)
-		# print(luass)
+		self.csp.variables = province_list
+		print(self.csp.graph.update_edge(province_list))
 		return province_list
-		
-	def min_conflicts(self, max_steps):
+
+	def min_conflicts(self, max_steps=100000):
 		current = self.assign()
+		if self.check_solution:
+			return current
 		
