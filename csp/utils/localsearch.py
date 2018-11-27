@@ -8,14 +8,14 @@ class LocalSearch:
 		self.csp = csp
 	
 	def check_solution(self, current):
-		# d = {}
-		# for prov in current:
-		# 	d[prov] = prov
-		# for a,b in self.csp.constraints:
-		# 	# print(a[0], a[1])
-		# 	if d[a].color == d[b].color:
-		print("CHECK SOLUTION")
-		if self.calculate_conflicts(current) != 0:
+		d = {}
+		for prov in current:
+			d[prov] = prov
+		for a,b in self.csp.constraints:
+			# print(a[0], a[1])
+			if d[a].color == d[b].color:
+		# print("CHECK SOLUTION")
+		# if self.calculate_conflicts(current) != 0:
 				return False
 		return True
 
