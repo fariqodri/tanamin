@@ -27,7 +27,7 @@ def submit_tanaman(request):
     # print(graph.keys())
     csp = Csp(graph, colors)
     local_search = LocalSearch(csp)
-    local_search.min_conflicts()
-    # print(local_search.assign())
+    for i in local_search.min_conflicts():
+      print(i.name, i.color)
 
   return redirect("home:index")
