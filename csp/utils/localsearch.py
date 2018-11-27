@@ -8,14 +8,14 @@ class LocalSearch:
 		self.csp = csp
 	
 	def check_solution(self, current):
-		d = {}
-		for prov in current:
-			d[prov] = prov
-		for a,b in self.csp.constraints:
-			# print(a[0], a[1])
-			if d[a].color == d[b].color:
-		# print("CHECK SOLUTION")
-		# if self.calculate_conflicts(current) != 0:
+		# d = {}
+		# for prov in current:
+		# 	d[prov] = prov
+		# for a,b in self.csp.constraints:
+		# 	# print(a[0], a[1])
+		# 	if d[a].color == d[b].color:
+		print("CHECK SOLUTION")
+		if self.calculate_conflicts(current) != 0:
 				return False
 		return True
 
@@ -34,7 +34,7 @@ class LocalSearch:
 		return vars
 
 	def conflicts(self, variable, value, current):
-		print("CONFLICTS")
+		# print("CONFLICTS")
 		for i in range(len(current)):
 			province = current[i]
 			if province.get_name() == variable.get_name():
@@ -50,7 +50,6 @@ class LocalSearch:
 		for a,b in self.csp.constraints:
 			if provs[a].get_color() == provs[b].get_color():
 				count += 1
-		print(count)
 		return count
 	
 	def assign(self):
@@ -75,9 +74,10 @@ class LocalSearch:
 		confs = self.calculate_conflicts(current)
 		curr_confs = 100000000000
 		current_copy = current
-		while(True):
-			value = self.csp.domains[random.randint(0, len(self.csp.domains) - 1)]
+		prev_value = 0
+		for value in self.csp.domains:
 			curr_confs = self.conflicts(var, value, current)
+			print(curr_confs, confs)
 			if (curr_confs < confs):
 				return value
 			# nearests = sorted(current, key=lambda x: math.abs(x.area - var.area))[1:]
@@ -89,12 +89,11 @@ class LocalSearch:
 			# var.set_color(swapped.color)
 			# if 
 
-	def min_conflicts(self, max_steps=10000):
+	def min_conflicts(self, max_steps=100):
 		current = list(self.assign())
 		for i in range(max_steps):
-			# print(i, self.calculate_conflicts(current))
+			print("iter:", i, self.calculate_conflicts(current))
 			if self.check_solution(current):
-				print("FOUND")
 				return current
 			conflicts = self.conflicted_variable(current)
 			var = conflicts[random.randint(0, len(conflicts) - 1)]
