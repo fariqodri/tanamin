@@ -14,8 +14,11 @@ class LocalSearch:
 		# for a,b in self.csp.constraints:
 		# 	# print(a[0], a[1])
 		# 	if d[a].color == d[b].color:
-		print("CHECK SOLUTION")
-		if self.calculate_conflicts(current) != 0:
+		# if self.calculate_conflicts(current) != 0:
+		# 		return False
+		# return True
+		for a,b in self.csp.constraints:
+			if current[a.name].color == current[b.name].color:
 				return False
 		return True
 
@@ -23,10 +26,8 @@ class LocalSearch:
 		print("CONFLICTED VARS")
 		d = {}
 		vars = []
-		for prov in current:
-			d[prov] = prov
 		for a,b in self.csp.graph.generate_edges():
-			if d[a].color == d[b].color:
+			if current[a.name].color == current[b.name].color:
 				if (a not in vars):
 					vars.append(a)
 				if (b not in vars):
@@ -34,21 +35,15 @@ class LocalSearch:
 		return vars
 
 	def conflicts(self, variable, value, current):
-		# print("CONFLICTS")
-		for i in range(len(current)):
-			province = current[i]
-			if province.get_name() == variable.get_name():
-				current[i].set_color(value)
-				return self.calculate_conflicts(current)
+		province = current[variable.name]
+		province.set_color(value)
+		current[variable.name] = province
+		return self.calculate_conflicts(current)
 
 	def calculate_conflicts(self, current):
-		# print("CALCULATE")
 		count = 0
-		provs = {}
-		for prov in current:
-			provs[prov] = prov
 		for a,b in self.csp.constraints:
-			if provs[a].get_color() == provs[b].get_color():
+			if current[a.name].color == current[b.name].color:
 				count += 1
 		return count
 	
@@ -57,16 +52,16 @@ class LocalSearch:
 		AREA = 8087393
 		area_divided = AREA // 4
 		color_area = []
-		province_list = self.csp.variables
+		result = {}
 		for i in self.csp.domains:
 			color_area.append([i, area_divided])
-		for province in province_list:
+		for province in self.csp.variables:
 			color_area.sort(key=lambda x: x[1], reverse=True)
 			color, area = color_area[0]
 			province.set_color(color)
 			color_area[0][1] -= province.area
-		self.csp.variables = province_list
-		return province_list
+			result[province.name] = province
+		return result
 
 	'''CARI VALUE YANG BISA MEMINIMALISIR KONFLIK DAN MEMPERTAHANKAN KONSISTENSI LUAS'''
 	def find_value(self, var, current):
@@ -77,28 +72,18 @@ class LocalSearch:
 		prev_value = 0
 		for value in self.csp.domains:
 			curr_confs = self.conflicts(var, value, current)
-			print(curr_confs, confs)
 			if (curr_confs < confs):
 				return value
-			# nearests = sorted(current, key=lambda x: math.abs(x.area - var.area))[1:]
-			# swapped = nearests[0]
-			
-			# for i in range(len(current_copy)):
-			# 	if current_copy[i] == var:
-			# 		for j in range
-			# var.set_color(swapped.color)
-			# if 
 
 	def min_conflicts(self, max_steps=100):
-		current = list(self.assign())
+		current = self.assign()
 		for i in range(max_steps):
-			print("iter:", i, self.calculate_conflicts(current))
+			print("iter:", i, ", conflicts: ", self.calculate_conflicts(current))
 			if self.check_solution(current):
 				return current
 			conflicts = self.conflicted_variable(current)
 			var = conflicts[random.randint(0, len(conflicts) - 1)]
 			value = self.find_value(var, current)
-			for i in range(len(current)):
-				if (current[i] == var):
-					current[i].set_color(value)
+			if value:
+				current[var.name].set_color(value)
 		return current

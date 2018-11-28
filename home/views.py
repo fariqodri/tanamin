@@ -27,7 +27,10 @@ def submit_tanaman(request):
     # print(graph.keys())
     csp = Csp(graph, colors)
     local_search = LocalSearch(csp)
-    for i in local_search.min_conflicts():
-      print(i.name, i.color)
+    a = {'padi':0, 'jagung':0, 'tebu':0, 'teh':0}
+    r = local_search.min_conflicts()
+    for i in r:
+      a[r[i].color.plant] += r[i].area
+    print(a)
 
   return redirect("home:index")

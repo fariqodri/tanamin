@@ -7,7 +7,7 @@ class Color:
 		self.plant = plant
 
 	def __repr__(self):
-		return self.plant
+		return self.plant + " " + str(self.num)
 
 	def __eq__(self, other):
 		if isinstance(other, self.__class__):
