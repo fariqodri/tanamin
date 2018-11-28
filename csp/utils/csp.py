@@ -1,6 +1,6 @@
 class Csp:
 	def __init__(self, graph, colors):
-		self.variables = graph.keys()
+		self.variables = list(graph.keys())
 		self.domains = colors
 		self.constraints = graph.generate_edges()
 		self.graph = graph
