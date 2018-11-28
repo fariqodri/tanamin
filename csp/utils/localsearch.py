@@ -35,7 +35,7 @@ class LocalSearch:
 		current[variable.name].set_color(value)
 		max_color = self.find_biggest_color(current)
 		min_color = self.find_smallest_color(current)
-		if self.get_area_of_color(max_color, current) - self.get_area_of_color(min_color, current) >= 250000:
+		if self.get_area_of_color(max_color, current) - self.get_area_of_color(min_color, current) >= 200000:
 			return False
 		return True
 
@@ -119,21 +119,27 @@ class LocalSearch:
 		current = self.assign()
 		prev_confs = self.calculate_conflicts(current)
 		same_times = 0
-		for i in range(max_steps):
-			confs = self.calculate_conflicts(current)
-			print("iter:", i, ", conflicts: ", confs)
-			if self.check_solution(current):
-				return current
-			conflicts = self.conflicted_variable(current)
-			var = conflicts[random.randint(0, len(conflicts) - 1)]
-			value = self.find_value(var, current)
-			prev_confs = confs
-			print(same_times)
-			if value:
+		count = 0
+		while count < 100000:
+			for i in range(max_steps):
+				confs = self.calculate_conflicts(current)
+				if self.check_solution(current):
+					return current
+				conflicts = self.conflicted_variable(current)
+				var = conflicts[random.randint(0, len(conflicts) - 1)]
+				value = self.find_value(var, current)
+				prev_confs = confs
+				print(same_times)
 				current[var.name].set_color(value)
-			if prev_confs <= confs:
-				same_times += 1
-			if prev_confs <= confs and same_times >= 1000:
+				if prev_confs <= confs:
+					same_times += 1
+				if prev_confs <= confs and same_times >= 1000:
+					break
+			if prev_confs <= 3:
 				break
+			else:
+				current = self.assign()
+				prev_confs = self.calculate_conflicts(current)
+			count += 1
 		print(self.get_color_data(current))
 		return current, self.conflicted_variable(current)
