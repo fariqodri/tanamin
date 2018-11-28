@@ -120,7 +120,7 @@ class LocalSearch:
 		prev_confs = self.calculate_conflicts(current)
 		same_times = 0
 		count = 0
-		while count < 100000:
+		while True:
 			for i in range(max_steps):
 				confs = self.calculate_conflicts(current)
 				if self.check_solution(current):
@@ -135,11 +135,12 @@ class LocalSearch:
 					same_times += 1
 				if prev_confs <= confs and same_times >= 1000:
 					break
-			if prev_confs <= 3:
+			count += 1
+			if prev_confs <= 3 or count > 50000:
 				break
 			else:
 				current = self.assign()
 				prev_confs = self.calculate_conflicts(current)
-			count += 1
+
 		print(self.get_color_data(current))
 		return current, self.conflicted_variable(current)
