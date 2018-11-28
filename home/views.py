@@ -26,9 +26,9 @@ def submit_tanaman(request):
     csp = Csp(graph, colors)
     local_search = LocalSearch(csp)
     a = {'padi':0, 'jagung':0, 'tebu':0, 'teh':0}
-    r = local_search.min_conflicts()
+    r,c = local_search.min_conflicts()
     for i in r:
       a[r[i].color.plant] += r[i].area
     print(a)
-  return render(request,'index.html', {"dictionary":r, "luas_pangan": a})
+  return render(request,'index.html', {"dictionary":r, "luas_pangan": a, 'conflicts': c})
   

@@ -38,6 +38,12 @@
                     {{key}}: {{ value }}
                 {% endfor %}
             </p>
+            <p>
+                Conflicts: 
+                {% for prov in conflicts %}
+                    {{prov.name}},
+                {% endfor %}
+            </p>
             <div class="card">
                 <h5 class="card-header">Form Input User</h5>
                 <div class="card-body">
