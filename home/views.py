@@ -22,11 +22,13 @@ def submit_tanaman(request):
         graph.add_edge(prov, Province(name=obj.neighbor.name, area=obj.neighbor.area))
       else:
         graph.add_edge(prov)
+      
     csp = Csp(graph, colors)
-    local_search = LocalSearch(csp, big_to_small=True)
+    local_search = LocalSearch(csp)
     a = {'padi':0, 'jagung':0, 'tebu':0, 'teh':0}
     r = local_search.min_conflicts()
     for i in r:
       a[r[i].color.plant] += r[i].area
     print(a)
-  return redirect("home:index")
+  return render(request,'index.html', {"dictionary":r, "luas_pangan": a})
+  

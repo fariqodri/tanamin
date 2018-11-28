@@ -32,10 +32,10 @@ class LocalSearch:
 
 	def color_heuristic(self, variable, value, current):
 		current[variable.name].set_color(value)
-		# current[variable.name] = province
 		print(self.get_area_of_color(value, current))
 		if self.get_area_of_color(value, current) > self.max_area:
-			return False			
+			return False
+		return True
 
 	def calculate_conflicts(self, current):
 		count = 0
@@ -72,15 +72,22 @@ class LocalSearch:
 
 	'''CARI VALUE YANG BISA MEMINIMALISIR KONFLIK DAN MEMPERTAHANKAN KONSISTENSI LUAS'''
 	def find_value(self, var, current):
-		# print("FIND VALUE")
-		
 		confs = self.calculate_conflicts(current)
 		curr_confs = 100000000000
 		for value in self.csp.domains:
 			curr_confs = self.conflicts(var, value, current)
-			self.color_heuristic(var, value, current)
-			if (curr_confs < confs):
+			if (curr_confs < confs and self.color_heuristic(var, value, current)):
 					return value
+			else:
+				smallest = self.find_biggest_color(current)
+				return smallest
+
+	def find_biggest_color(self, current):
+		r = {}
+		for c in self.csp.domains:
+			r[c] = self.get_area_of_color(c, current)
+		r = dict(sorted(r.items(), key=lambda x:x[1]))
+		return list(r.keys())[0]
 
 	def get_area_of_color(self, color, current):
 		count = 0
@@ -89,7 +96,7 @@ class LocalSearch:
 				count += current[i].area
 		return count
 
-	def min_conflicts(self, max_steps=100):
+	def min_conflicts(self, max_steps=5000):
 		current = self.assign()
 		# print(current)
 		for i in range(max_steps):
@@ -99,6 +106,7 @@ class LocalSearch:
 			conflicts = self.conflicted_variable(current)
 			var = conflicts[random.randint(0, len(conflicts) - 1)]
 			value = self.find_value(var, current)
+			print(value)
 			if value:
 				current[var.name].set_color(value)
 		return current
