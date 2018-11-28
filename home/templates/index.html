@@ -9,6 +9,14 @@
             <div class="text-center py-5 px-4 my-5">
                 <div>
                     <h2 class="display-1 h1-responsive pt-3 mb-5 font-bold"><strong>Tanamin</strong></h2>
+                    {% for key, value in dictionary.items %}
+                        <li class="data">{{ value.name }}</li>
+                        <li class="data">,</li>
+                        <li class="data">{{ value.color.num }}</li>
+                        <li class="data">,</li>
+                        <li class="data">{{ value.color.plant }}</li>
+                        <li class="data">;</li>
+                    {% endfor %}
                     <button class="btn btn-dark">
                         <a href="#map" style="text-decoration: none; color:white">
                             Coba!
