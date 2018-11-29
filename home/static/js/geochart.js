@@ -8,13 +8,40 @@ $(document).ready(function () {
     for (var i = 0; i < newND.length-1;i++){
         var tmp = newND[i].split(",");
         var angka = parseInt(tmp[1]);
-        tmp[1] = angka;    
+        tmp[1] = angka;        
+
+        if(tmp[0] == "DKI JAKARTA"){
+            tmp[0] = "JAKARTA RAYA";
+        }
+
+        else if(tmp[0] == "MALUKU"){
+            tmp[0] = "ID-MA";
+        }
+
+        else if(tmp[0] == "PAPUA BARAT"){
+            tmp[0] = "ID-PB";
+        }
+
+        else if(tmp[0] == "DI YOGYAKARTA"){
+            tmp[0] = "YOGYAKARTA";
+        }
+
+        else if(tmp[0] == "KEP. RIAU"){
+            tmp[0] = "ID-KR";
+        }
+
+        else if(tmp[0] == "KEP. BANGKA BELITUNG"){
+            tmp[0] = "BANGKA BELITUNG";
+        }
+    
         hasil.push(tmp)
     }
     
     google.charts.setOnLoadCallback(drawRegionsMap);
 
     function drawRegionsMap() {
+    
+    console.log(hasil)
 
     var data = google.visualization.arrayToDataTable([
         ['Provinsi', 'Value', {

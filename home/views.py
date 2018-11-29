@@ -28,10 +28,6 @@ def submit_tanaman(request):
     a = {'padi':0, 'jagung':0, 'tebu':0, 'teh':0}
     r,c = local_search.min_conflicts()
     # print(c)
-    for i in r:
-      a[r[i].color.plant] += r[i].area
-    for i in a:
-      a[i] = int(a[i])
-    print(a)
+    
   return render(request,'index.html', {"dictionary":r, "luas_pangan": a, 'conflicts': c//2})
   
