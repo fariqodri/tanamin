@@ -1,7 +1,6 @@
 from load_csv.models import Province as ProvinceModel
 from csp.utils import Province, Color
-import random
-import math
+import random, math, sys
 from collections import defaultdict
 
 class LocalSearch:
@@ -13,14 +12,10 @@ class LocalSearch:
 		return (confs - 1) == 0
 
 	def conflicted_variable(self, current):
-		vars = []
-		for a,b in self.csp.graph.generate_edges():
-			if current[a.name].color == current[b.name].color:
-				if (a not in vars):
-					vars.append(current[a.name])
-				if (b not in vars):
-					vars.append(current[b.name])
-		return vars
+		vars_a = {a for a,b in self.csp.constraints if current[a.name].color == current[b.name].color}
+		vars_b = {b for a,b in self.csp.constraints if current[a.name].color == current[b.name].color}
+		vars_new = vars_a.union(vars_b)
+		return list(vars_new)
 
 	def conflicts(self, variable, value, current):
 		province = current[variable.name]
@@ -42,7 +37,7 @@ class LocalSearch:
 
 	def calculate_conflicts(self, current):
 		count = 0
-		for a,b in self.csp.graph.generate_edges():
+		for a,b in self.csp.constraints:
 			if current[a.name].color == current[b.name].color:
 				count += 1
 		return count
@@ -100,31 +95,38 @@ class LocalSearch:
 				res[v.color] = v.area
 		return res
 
-	def min_conflicts(self, max_steps=1000):
-		current = self.assign()
-		prev_confs = self.calculate_conflicts(current)
+	def main(self, max_steps=1000, current=None):
+		if not current:
+			current = self.assign()
+		prev_confs = sys.maxsize
 		same_times = 0
+		for i in range(max_steps):
+			conflicts = self.conflicted_variable(current)
+			confs = len(conflicts)
+
+			# if self.check_solution(confs) and self.color_term(current, 300000):
+			# 	print("GOOD FOUND")
+			# 	return current
+
+			if prev_confs <= confs:
+				same_times += 1
+
+			if same_times >= 100:
+					return current, confs
+			prev_confs = confs
+
+			var = conflicts[random.randint(0, len(conflicts) - 1)]
+			value = self.find_value(var, current)
+			current[var.name].set_color(value)
+		return current, confs
+
+	def min_conflicts(self, max_steps=1000):
+		current, confs = self.main()
 		count = 0
-		while True:
-			for i in range(max_steps):
-				confs = self.calculate_conflicts(current)
-				if self.check_solution(confs) and self.color_term(current, 300000):
-					print("GOOD FOUND")
-					return current
-				conflicts = self.conflicted_variable(current)
-				var = conflicts[random.randint(0, len(conflicts) - 1)]
-				value = self.find_value(var, current)
-				prev_confs = confs
-				current[var.name].set_color(value)
-				if prev_confs <= confs:
-					same_times += 1
-				if prev_confs <= confs and same_times >= 1000:
-					break
-			count += 1
-			if (prev_confs <= 3 and self.color_term(current, 300000)) or count > 50000:
-				print("BAD FOUND")
-				break
+		while count <= 10000:
+			if (confs - 1 <= 3 and self.color_term(current, 300000)):
+				return current, confs - 1
 			else:
-				current = self.assign()
-				prev_confs = self.calculate_conflicts(current)
-		return current, self.conflicted_variable(current)
+				current, confs = self.main()
+			count += 1
+		return current, confs - 1

@@ -8,11 +8,10 @@ $(document).ready(function () {
     for (var i = 0; i < newND.length-1;i++){
         var tmp = newND[i].split(",");
         var angka = parseInt(tmp[1]);
-        tmp[1] =angka;
+        tmp[1] = angka;    
         hasil.push(tmp)
     }
     
-    console.log(hasil)
     google.charts.setOnLoadCallback(drawRegionsMap);
 
     function drawRegionsMap() {
