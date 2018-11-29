@@ -72,7 +72,7 @@ class LocalSearch:
 	def find_value(self, var, current):
 		confs = self.calculate_conflicts(current)
 		for value in self.csp.domains:
-			if self.conflicts(var, value, current) < confs and self.color_heuristic(current, var, value):
+			if self.conflicts(var, value, current) < confs and self.color_heuristic(current, var, value, max_diff=100000):
 					return value
 		smallest = self.find_smallest_color(current)
 		return smallest
@@ -121,7 +121,7 @@ class LocalSearch:
 				if prev_confs <= confs and same_times >= 1000:
 					break
 			count += 1
-			if (prev_confs <= 3 and self.color_term(current, 300000)) or count > 10000:
+			if (prev_confs <= 3 and self.color_term(current, 300000)) or count > 50000:
 				print("BAD FOUND")
 				break
 			else:
