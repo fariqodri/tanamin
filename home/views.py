@@ -38,4 +38,4 @@ def submit_tanaman(request):
 	return render(request,'index.html', {"dictionary":r, "luas_pangan": a, 'conflicts': c//2})
 	
 def app(request):
-	return render(request, "index.html")
+	return render(request, "landing.html")

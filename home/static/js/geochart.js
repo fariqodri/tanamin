@@ -3,37 +3,25 @@ $(document).ready(function () {
     'packages': ['geochart']
     });
     $("form").submit(event => {
-        // event.preventDefault()
-        // var tanamans = [];
-        // $.each($("input[name='plant']:checked"), function(){            
-        //     tanamans.push($(this).val());
-        // });
-        // var CSRFtoken = $('input[name=csrfmiddlewaretoken]').val();
-        // const header = new Headers({
-        //     'X-XSRF-TOKEN': CSRFtoken
-        // })
-        // console.log(CSRFtoken);
-        
-        // fetch("http://localhost:8000/tanaman/", {
-        //     method:"POST",
-        //     body:JSON.stringify({data:tanamans}),
-        //     headers:header
-        // }).then(res => console.log("suckses")).catch(err => console.log(err))
-        // // $.post('/tanaman/', { 
-        // //     item_text: {"data": tanamans},
-        // //     csrfmiddlewaretoken: CSRFtoken
-        // // });
-        // const size = tanamans.length;
         const r = $("#tanaman").val().split("_")
         const sliced = r.slice(1);
-
+        const plants = ["padi", "jagung", "tebu", "kopi",
+                        "teh", "kelapa sawit", "cengkeh", "tembakau"]
         
+        for (var i = 0; i < sliced.length; i++){
+            if (!(plants.includes(sliced[i].toLowerCase()))){
+                console.log(sliced[i].toLowerCase())
+                event.preventDefault();
+                alert("Tanaman tidak bisa dimasukkan.")
+                break;
+            }
+        }
 
-        if (sliced < 3 || sliced > 6) {
+        if (sliced.length < 3 || sliced.length > 6) {
             event.preventDefault();
             alert("Jumlah tidak sesuai (3 sampai 6)");
         }
-        else if (r.slice(1).length != size) {
+        else if (r.slice(1).length != r[0]) {
             event.preventDefault();
             alert("Berikan jumlah tanaman yang tepat sesuai input")
         }
@@ -145,7 +133,7 @@ $(document).ready(function () {
         displayMode: 'regions',
         resolution: 'provinces',
         colorAxis: {
-            colors: ['#107895', '#EBC844', '#F58A4B', '#92A660', '#F44242', '#BE41f4'],
+            colors: ['#724C9F', '#FFC60B', '#F58A4B', '#0EB99E', '#EF426D', '#AEA1A4'],
             values: [1, 2, 3, 4, 5, 6]
         },
         backgroundColor: {
