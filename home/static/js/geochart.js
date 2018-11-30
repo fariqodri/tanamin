@@ -3,9 +3,33 @@ $(document).ready(function () {
     'packages': ['geochart']
     });
     $("form").submit(event => {
-        r = $("#tanaman").val().split("_");
-        size = parseInt(r[0]);
-        if (size < 3 || size > 6) {
+        // event.preventDefault()
+        // var tanamans = [];
+        // $.each($("input[name='plant']:checked"), function(){            
+        //     tanamans.push($(this).val());
+        // });
+        // var CSRFtoken = $('input[name=csrfmiddlewaretoken]').val();
+        // const header = new Headers({
+        //     'X-XSRF-TOKEN': CSRFtoken
+        // })
+        // console.log(CSRFtoken);
+        
+        // fetch("http://localhost:8000/tanaman/", {
+        //     method:"POST",
+        //     body:JSON.stringify({data:tanamans}),
+        //     headers:header
+        // }).then(res => console.log("suckses")).catch(err => console.log(err))
+        // // $.post('/tanaman/', { 
+        // //     item_text: {"data": tanamans},
+        // //     csrfmiddlewaretoken: CSRFtoken
+        // // });
+        // const size = tanamans.length;
+        const r = $("#tanaman").val().split("_")
+        const sliced = r.slice(1);
+
+        
+
+        if (sliced < 3 || sliced > 6) {
             event.preventDefault();
             alert("Jumlah tidak sesuai (3 sampai 6)");
         }
@@ -13,6 +37,19 @@ $(document).ready(function () {
             event.preventDefault();
             alert("Berikan jumlah tanaman yang tepat sesuai input")
         }
+        
+        // else {
+        //     for (var i; i < sliced.length; i++) {
+        //         console.log(tanamans);
+                
+        //         if (sliced[i] in tanamans) {
+        //             event.preventDefault()
+        //             alert("Ada tanaman yang sama")
+        //         }else {
+        //             tanamans.push(sliced[i])
+        //         }
+        //     }
+        // }
     });
     var namaDaerah = $(".data").text();
     var newND = namaDaerah.split(";");
@@ -56,6 +93,8 @@ $(document).ready(function () {
     function drawRegionsMap() {
     
     console.log(hasil)
+
+    
 
     var data = google.visualization.arrayToDataTable([
         ['Provinsi', 'Value', {

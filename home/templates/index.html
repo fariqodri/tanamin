@@ -66,7 +66,7 @@
                 <div class="card-body">
                     <form action="{% url 'home:submit_tanaman' %}" method="POST">
                         {% csrf_token %}
-                        <div class="form-row">
+                        <div class="form-check">
                             <div class="col-md">
                                 <small class="form-text text-muted">
                                     format: [Jumlah Jenis Tanaman]_[Jenis Tanaman 1]_[Jenis Tanaman n]
@@ -82,7 +82,51 @@
                                     contoh: 4_padi_tebu_jagung_teh
                                 </small>
                                 <label for="tanaman">Jumlah dan Jenis Tanaman <small>(minimal 4 jenis tanaman)</small></label>
-                                <input type="text" id="tanaman" class="form-control" name="tanamans" required>
+                                <input type="text" id="tanaman" class="form-control" name="tanamans">
+                                
+                                <!-- <div class="row">
+                                    <div class="col-md-3">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" name="plant" type="checkbox" id="inlineCheckbox1" value="Jagung">
+                                        <label class="form-check-label" for="inlineCheckbox1">Jagung</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" name="plant" type="checkbox" id="inlineCheckbox2" value="Cengkeh">
+                                        <label class="form-check-label" for="inlineCheckbox2">Cengkeh</label>
+                                    </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" name="plant" type="checkbox" id="inlineCheckbox3" value="Tebu">
+                                            <label class="form-check-label" for="inlineCheckbox3">Tebu</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" name="plant" type="checkbox" id="inlineCheckbox4" value="Teh">
+                                            <label class="form-check-label" for="inlineCheckbox4">Teh</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" name="plant[]" type="checkbox" id="inlineCheckbox8" value="Kopi">
+                                            <label class="form-check-label" for="inlineCheckbox8">Kopi</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" name="plant" type="checkbox" id="inlineCheckbox5" value="Padi">
+                                            <label class="form-check-label" for="inlineCheckbox5">Padi</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" name="plant" type="checkbox" id="inlineCheckbox6" value="Kelapa Sawit">
+                                            <label class="form-check-label" for="inlineCheckbox6">Kelapa Sawit</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" name="plant" type="checkbox" id="inlineCheckbox7" value="Tembakau">
+                                            <label class="form-check-label" for="inlineCheckbox7">Tembakau</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                 -->
                             </div>
                         </div>
                         <button type="submit" class="btn btn-primary my-1">Submit</button>

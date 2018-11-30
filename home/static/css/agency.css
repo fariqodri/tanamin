@@ -176,12 +176,15 @@ img::-moz-selection {
 header.masthead {
   text-align: center;
   color: white;
+
   background-image: url("../img/sawah.jpg");
   background-repeat: no-repeat;
-  background-attachment: scroll;
+  background-attachment: fixed;
   background-position: center center;
   background-size: cover;
 }
+
+#
 
 header.masthead .intro-text {
   padding-top: 150px;
