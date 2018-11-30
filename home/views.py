@@ -27,10 +27,11 @@ def submit_tanaman(request):
     local_search = LocalSearch(csp, jumlah)
     a = {plant:0 for plant in tanamans}
     r,c = local_search.min_conflicts()
+    conflicts = local_search.conflicted_variable(r)
     if c % 2 != 0:
       c += 1
     for i in r:
       a[r[i].color.plant] += r[i].area
         
-  return render(request,'index.html', {"dictionary":r, "luas_pangan": a, 'conflicts': c//2, 'tanamans':int(jumlah)})
+  return render(request,'index.html', {"dictionary":r, "luas_pangan": a, 'conflicts_num': c//2, 'tanamans':int(jumlah), "conflicts": conflicts})
   
