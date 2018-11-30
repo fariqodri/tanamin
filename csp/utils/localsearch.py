@@ -122,7 +122,7 @@ class LocalSearch:
 		current, confs = self.main()
 		count = 0
 		while count <= 10000:
-			if self.check_solution(confs) and self.color_term(current, 100000):
+			if self.check_solution(confs) and self.color_term(current, 200000):
 				return current, confs
 			if (confs <= 2 and self.color_term(current, 200000)):
 				return current, confs

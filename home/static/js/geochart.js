@@ -2,7 +2,14 @@ $(document).ready(function () {
     google.charts.load('current', {
     'packages': ['geochart']
     });
-    
+    $("form").submit(event => {
+        r = $("#tanaman").val().split("_");
+        size = parseInt(r[0]);
+        if (r.slice(1).length != size) {
+            event.preventDefault();
+            alert("Berikan jumlah tanaman yang tepat sesuai input")
+        }
+    });
     var namaDaerah = $(".data").text();
     var newND = namaDaerah.split(";");
     console.log($(".jumlah").val());
