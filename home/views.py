@@ -5,6 +5,9 @@ from csp.utils import Color, Province, Graph, Csp, LocalSearch
 
 # Create your views here.
 def index(request):
+  return render(request, 'landing.html')
+
+def app(request):
   return render(request, 'index.html')
 
 def submit_tanaman(request):
