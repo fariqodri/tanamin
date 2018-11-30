@@ -5,7 +5,11 @@ $(document).ready(function () {
     $("form").submit(event => {
         r = $("#tanaman").val().split("_");
         size = parseInt(r[0]);
-        if (r.slice(1).length != size) {
+        if (size < 3 || size > 6) {
+            event.preventDefault();
+            alert("Jumlah tidak sesuai (3 sampai 6)");
+        }
+        else if (r.slice(1).length != size) {
             event.preventDefault();
             alert("Berikan jumlah tanaman yang tepat sesuai input")
         }
@@ -102,8 +106,8 @@ $(document).ready(function () {
         displayMode: 'regions',
         resolution: 'provinces',
         colorAxis: {
-            colors: ['#107895', '#EBC844', '#F58A4B', '#92A660'],
-            values: [1, 2, 3, 4]
+            colors: ['#107895', '#EBC844', '#F58A4B', '#92A660', '#F44242', '#BE41f4'],
+            values: [1, 2, 3, 4, 5, 6]
         },
         backgroundColor: {
             fill: '#FFFFFF'
