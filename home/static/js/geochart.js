@@ -2,8 +2,11 @@ $(document).ready(function () {
     google.charts.load('current', {
     'packages': ['geochart']
     });
+    
     var namaDaerah = $(".data").text();
     var newND = namaDaerah.split(";");
+    console.log($(".jumlah").val());
+    
     var hasil = []
     for (var i = 0; i < newND.length-1;i++){
         var tmp = newND[i].split(",");
@@ -87,44 +90,6 @@ $(document).ready(function () {
         hasil[33],
         
     ]);
-
-
-
-
-
-    var lists = [['Banten', 1, "Padi"],
-    ['Sumatera Utara', 2, "Jagung"],
-    ['Aceh', 3, "Teh"],
-    ['Riau', 4, "Kopi"],
-    ['Sumatera Barat', 1, "Padi"],
-    ['Jambi', 2, "Jagung"],
-    ['Bengkulu', 3, "Teh"],
-    ['Sumatera Selatan', 4, "Kopi"],
-    ['Lampung', 1, "Padi"],
-    ['Jakarta', 4, "Kopi"],
-    ['Jawa Barat', 2, "Jagung"],
-    ['Jawa Tengah', 3, "Teh"],
-    ['Yogyakarta', 1, "Padi"],
-    ['Jawa Timur', 2, "Jagung"],
-    ['Bali', 3, "Teh"],
-    ['Nusa Tenggara Barat', 4, "Kopi"],
-    ['Nusa Tenggara Timur', 1, "Padi"],
-    ['Bangka Belitung', 2, "Jagung"],
-    ['Kalimantan Barat', 3, "Teh"],
-    ['Kalimantan Tengah', 4, "Kopi"],
-    ['Kalimantan Selatan', 1, "Padi"],
-    ['Kalimantan Timur', 2, "Jagung"],
-    ['Kalimantan Utara', 3, "Teh"],
-    ['Sulawesi Selatan', 4, "Kopi"],
-    ['Sulawesi Tenggara', 1, "Padi"],
-    ['Sulawesi Barat', 2, "Jagung"],
-    ['Sulawesi Tengah', 3, "Teh"],
-    ['Sulawesi Utara', 4, "Kopi"],
-    ['Gorontalo', 1, "Padi"],
-    ['ID-MA', 2, "Jagung"], 
-    ['ID-PB', 3, "Teh"], 
-    ['Papua', 4, "Kopi"],
-    ['Maluku Utara', 1, "Padi"]]
 
     var options = {
         region: 'ID',

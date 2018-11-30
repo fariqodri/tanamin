@@ -24,10 +24,13 @@ def submit_tanaman(request):
         graph.add_edge(prov)
       
     csp = Csp(graph, colors)
-    local_search = LocalSearch(csp)
-    a = {'padi':0, 'jagung':0, 'tebu':0, 'teh':0}
+    local_search = LocalSearch(csp, jumlah)
+    a = {plant:0 for plant in tanamans}
     r,c = local_search.min_conflicts()
-    # print(c)
-    
-  return render(request,'index.html', {"dictionary":r, "luas_pangan": a, 'conflicts': c//2})
+    if c % 2 != 0:
+      c += 1
+    for i in r:
+      a[r[i].color.plant] += r[i].area
+        
+  return render(request,'index.html', {"dictionary":r, "luas_pangan": a, 'conflicts': c//2, 'tanamans':int(jumlah)})
   
