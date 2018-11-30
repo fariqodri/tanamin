@@ -2,30 +2,31 @@
 {% load static %}
 {% block css %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/tanamin.css' %}">
+
+    <!-- Custom fonts for this template -->
+    <link href="{% static 'css/all.css' %}" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'css/agency.css' %}" rel="stylesheet">
+
 {% endblock %}
 {% block content %}
-    <section class="jumbotron" id="home">
-        <div class="container cards">
-            <div class="text-center py-5 px-4 my-5">
-                <div>
-                    <h2 class="display-1 h1-responsive pt-3 mb-5 font-bold"><strong>Tanamin</strong></h2>
-                    {% for key, value in dictionary.items %}
-                        <li class="data">{{ value.name }}</li>
-                        <li class="data">,</li>
-                        <li class="data">{{ value.color.num }}</li>
-                        <li class="data">,</li>
-                        <li class="data">{{ value.color.plant }}</li>
-                        <li class="data">;</li>
-                    {% endfor %}
-                    <button class="btn btn-dark">
-                        <a href="#map" style="text-decoration: none; color:white">
-                            Coba!
-                        </a>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </section>
+
+
+      <div>
+        {% for key, value in dictionary.items %}
+            <li class="data">{{ value.name }}</li>
+            <li class="data">,</li>
+            <li class="data">{{ value.color.num }}</li>
+            <li class="data">,</li>
+            <li class="data">{{ value.color.plant }}</li>
+            <li class="data">;</li>
+        {% endfor %}
+    </div>
     <section class="map" id="map">
         <div class="container-map">
             <h1>Peta Persebaran Pangan Indonesia - <em>tanamin</em></h1>
@@ -75,4 +76,14 @@
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script type="text/javascript" src="{% static 'js/geochart.js' %}"></script>
-{% endblock %}
+
+    <!-- Bootstrap core JavaScript -->
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+
+<!-- Plugin JavaScript -->
+<script src="{% static 'js/jquery.easing.js'%}"></script>
+
+<!-- Custom scripts for this template -->
+<script src="{% static 'js/agency.js' %}"></script>
+    {% endblock %}
