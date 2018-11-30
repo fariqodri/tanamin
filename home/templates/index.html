@@ -15,18 +15,29 @@
 
 {% endblock %}
 {% block content %}
-
-
-      <div>
-        {% for key, value in dictionary.items %}
-            <li class="data">{{ value.name }}</li>
-            <li class="data">,</li>
-            <li class="data">{{ value.color.num }}</li>
-            <li class="data">,</li>
-            <li class="data">{{ value.color.plant }}</li>
-            <li class="data">;</li>
-        {% endfor %}
-    </div>
+    <section class="jumbotron" id="home">
+        <div class="container cards">
+            <div class="text-center py-5 px-4 my-5">
+                <div>
+                    <h2 class="display-1 h1-responsive pt-3 mb-5 font-bold"><strong>Tanamin</strong></h2>
+                    {% for key, value in dictionary.items %}
+                        <li class="data">{{ value.name }}</li>
+                        <li class="data">,</li>
+                        <li class="data">{{ value.color.num }}</li>
+                        <li class="data">,</li>
+                        <li class="data">{{ value.color.plant }}</li>
+                        <li class="data">;</li>
+                    {% endfor %}
+                    <h2 class="data jumlah">{{tanamans}}</h2>
+                    <button class="btn btn-dark">
+                        <a href="#map" style="text-decoration: none; color:white">
+                            Coba!
+                        </a>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
     <section class="map" id="map">
         <div class="container-map">
             <h1>Peta Persebaran Pangan Indonesia - <em>tanamin</em></h1>
@@ -41,9 +52,7 @@
             </p>
             <p>
                 Conflicts: 
-                {% for prov in conflicts %}
-                    {{prov.name}},
-                {% endfor %}
+                {{conflicts}}
             </p>
             <div class="card">
                 <h5 class="card-header">Form Input User</h5>
@@ -51,9 +60,16 @@
                     <form action="{% url 'home:submit_tanaman' %}" method="POST">
                         {% csrf_token %}
                         <div class="form-row">
-                            <div class="col-md-6">
+                            <div class="col-md">
                                 <small class="form-text text-muted">
                                     format: [Jumlah Jenis Tanaman]_[Jenis Tanaman 1]_[Jenis Tanaman n]
+                                </small>
+                                <small class="form-text text-danger">
+                                    Warning: semakin banyak atau sedikit tanaman yang diberikan, semakin lama proses searching
+                                    Jika angka yang diberikan terlalu banyak atau sedikit, maka proses mungkin gagal
+                                </small>
+                                <small class="form-text text-success">
+                                    Jumlah yang disarankan: 4-6
                                 </small>
                                 <small class="form-text text-muted">
                                     contoh: 4_padi_tebu_jagung_teh

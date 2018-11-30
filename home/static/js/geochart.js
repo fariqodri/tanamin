@@ -2,20 +2,60 @@ $(document).ready(function () {
     google.charts.load('current', {
     'packages': ['geochart']
     });
+    $("form").submit(event => {
+        r = $("#tanaman").val().split("_");
+        size = parseInt(r[0]);
+        if (size < 3 || size > 6) {
+            event.preventDefault();
+            alert("Jumlah tidak sesuai (3 sampai 6)");
+        }
+        else if (r.slice(1).length != size) {
+            event.preventDefault();
+            alert("Berikan jumlah tanaman yang tepat sesuai input")
+        }
+    });
     var namaDaerah = $(".data").text();
     var newND = namaDaerah.split(";");
+    console.log($(".jumlah").val());
+    
     var hasil = []
     for (var i = 0; i < newND.length-1;i++){
         var tmp = newND[i].split(",");
         var angka = parseInt(tmp[1]);
-        tmp[1] =angka;
+        tmp[1] = angka;        
+
+        if(tmp[0] == "DKI JAKARTA"){
+            tmp[0] = "JAKARTA RAYA";
+        }
+
+        else if(tmp[0] == "MALUKU"){
+            tmp[0] = "ID-MA";
+        }
+
+        else if(tmp[0] == "PAPUA BARAT"){
+            tmp[0] = "ID-PB";
+        }
+
+        else if(tmp[0] == "DI YOGYAKARTA"){
+            tmp[0] = "YOGYAKARTA";
+        }
+
+        else if(tmp[0] == "KEP. RIAU"){
+            tmp[0] = "ID-KR";
+        }
+
+        else if(tmp[0] == "KEP. BANGKA BELITUNG"){
+            tmp[0] = "BANGKA BELITUNG";
+        }
+    
         hasil.push(tmp)
     }
     
-    console.log(hasil)
     google.charts.setOnLoadCallback(drawRegionsMap);
 
     function drawRegionsMap() {
+    
+    console.log(hasil)
 
     var data = google.visualization.arrayToDataTable([
         ['Provinsi', 'Value', {
@@ -59,54 +99,15 @@ $(document).ready(function () {
         hasil[31],
         hasil[32],
         hasil[33],
-        
     ]);
-
-
-
-
-
-    var lists = [['Banten', 1, "Padi"],
-    ['Sumatera Utara', 2, "Jagung"],
-    ['Aceh', 3, "Teh"],
-    ['Riau', 4, "Kopi"],
-    ['Sumatera Barat', 1, "Padi"],
-    ['Jambi', 2, "Jagung"],
-    ['Bengkulu', 3, "Teh"],
-    ['Sumatera Selatan', 4, "Kopi"],
-    ['Lampung', 1, "Padi"],
-    ['Jakarta', 4, "Kopi"],
-    ['Jawa Barat', 2, "Jagung"],
-    ['Jawa Tengah', 3, "Teh"],
-    ['Yogyakarta', 1, "Padi"],
-    ['Jawa Timur', 2, "Jagung"],
-    ['Bali', 3, "Teh"],
-    ['Nusa Tenggara Barat', 4, "Kopi"],
-    ['Nusa Tenggara Timur', 1, "Padi"],
-    ['Bangka Belitung', 2, "Jagung"],
-    ['Kalimantan Barat', 3, "Teh"],
-    ['Kalimantan Tengah', 4, "Kopi"],
-    ['Kalimantan Selatan', 1, "Padi"],
-    ['Kalimantan Timur', 2, "Jagung"],
-    ['Kalimantan Utara', 3, "Teh"],
-    ['Sulawesi Selatan', 4, "Kopi"],
-    ['Sulawesi Tenggara', 1, "Padi"],
-    ['Sulawesi Barat', 2, "Jagung"],
-    ['Sulawesi Tengah', 3, "Teh"],
-    ['Sulawesi Utara', 4, "Kopi"],
-    ['Gorontalo', 1, "Padi"],
-    ['ID-MA', 2, "Jagung"], 
-    ['ID-PB', 3, "Teh"], 
-    ['Papua', 4, "Kopi"],
-    ['Maluku Utara', 1, "Padi"]]
 
     var options = {
         region: 'ID',
         displayMode: 'regions',
         resolution: 'provinces',
         colorAxis: {
-            colors: ['#107895', '#EBC844', '#F58A4B', '#92A660'],
-            values: [1, 2, 3, 4]
+            colors: ['#107895', '#EBC844', '#F58A4B', '#92A660', '#F44242', '#BE41f4'],
+            values: [1, 2, 3, 4, 5, 6]
         },
         backgroundColor: {
             fill: '#FFFFFF'
@@ -120,3 +121,4 @@ $(document).ready(function () {
     }
 }
 )
+
