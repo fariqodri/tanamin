@@ -85,7 +85,6 @@ $(document).ready(function () {
         hasil[31],
         hasil[32],
         hasil[33],
-        
     ]);
 
 
@@ -146,3 +145,4 @@ $(document).ready(function () {
     }
 }
 )
+
