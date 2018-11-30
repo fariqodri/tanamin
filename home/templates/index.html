@@ -17,6 +17,7 @@
                         <li class="data">{{ value.color.plant }}</li>
                         <li class="data">;</li>
                     {% endfor %}
+                    <h2 class="data jumlah">{{tanamans}}</h2>
                     <button class="btn btn-dark">
                         <a href="#map" style="text-decoration: none; color:white">
                             Coba!
@@ -48,9 +49,16 @@
                     <form action="{% url 'home:submit_tanaman' %}" method="POST">
                         {% csrf_token %}
                         <div class="form-row">
-                            <div class="col-md-6">
+                            <div class="col-md">
                                 <small class="form-text text-muted">
                                     format: [Jumlah Jenis Tanaman]_[Jenis Tanaman 1]_[Jenis Tanaman n]
+                                </small>
+                                <small class="form-text text-danger">
+                                    Warning: semakin banyak atau sedikit tanaman yang diberikan, semakin lama proses searching
+                                    Jika angka yang diberikan terlalu banyak atau sedikit, maka proses mungkin gagal
+                                </small>
+                                <small class="form-text text-success">
+                                    Jumlah yang disarankan: 4-6
                                 </small>
                                 <small class="form-text text-muted">
                                     contoh: 4_padi_tebu_jagung_teh

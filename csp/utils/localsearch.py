@@ -4,12 +4,13 @@ import random, math, sys
 from collections import defaultdict
 
 class LocalSearch:
-	def __init__(self, csp, big_to_small=True):
+	def __init__(self, csp, areas, big_to_small=True):
 		self.csp = csp
 		self.big_to_small = big_to_small
+		self.areas = areas
 	
 	def check_solution(self, confs):
-		return (confs - 1) == 0
+		return confs == 0
 
 	def conflicted_variable(self, current):
 		vars_a = {a for a,b in self.csp.constraints if current[a.name].color == current[b.name].color}
@@ -44,7 +45,7 @@ class LocalSearch:
 	
 	def assign(self):
 		AREA = 8087393
-		area_divided = AREA // 4
+		area_divided = AREA // int(self.areas)
 		color_area = []
 		result = {}
 		for i in self.csp.domains:
@@ -103,10 +104,8 @@ class LocalSearch:
 		for i in range(max_steps):
 			conflicts = self.conflicted_variable(current)
 			confs = len(conflicts)
-
-			# if self.check_solution(confs) and self.color_term(current, 300000):
-			# 	print("GOOD FOUND")
-			# 	return current
+			if confs == 0:
+				return current, confs
 
 			if prev_confs <= confs:
 				same_times += 1
@@ -114,7 +113,6 @@ class LocalSearch:
 			if same_times >= 100:
 					return current, confs
 			prev_confs = confs
-
 			var = conflicts[random.randint(0, len(conflicts) - 1)]
 			value = self.find_value(var, current)
 			current[var.name].set_color(value)
@@ -124,9 +122,11 @@ class LocalSearch:
 		current, confs = self.main()
 		count = 0
 		while count <= 10000:
-			if (confs - 1 <= 3 and self.color_term(current, 300000)):
-				return current, confs - 1
+			if self.check_solution(confs) and self.color_term(current, 200000):
+				return current, confs
+			if (confs <= 2 and self.color_term(current, 200000)):
+				return current, confs
 			else:
 				current, confs = self.main()
 			count += 1
-		return current, confs - 1
+		return current, confs
