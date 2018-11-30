@@ -15,29 +15,36 @@
 
 {% endblock %}
 {% block content %}
-    <section class="jumbotron" id="home">
-        <div class="container cards">
-            <div class="text-center py-5 px-4 my-5">
-                <div>
-                    <h2 class="display-1 h1-responsive pt-3 mb-5 font-bold"><strong>Tanamin</strong></h2>
-                    {% for key, value in dictionary.items %}
-                        <li class="data">{{ value.name }}</li>
-                        <li class="data">,</li>
-                        <li class="data">{{ value.color.num }}</li>
-                        <li class="data">,</li>
-                        <li class="data">{{ value.color.plant }}</li>
-                        <li class="data">;</li>
-                    {% endfor %}
-                    <h2 class="data jumlah">{{tanamans}}</h2>
-                    <button class="btn btn-dark">
-                        <a href="#map" style="text-decoration: none; color:white">
-                            Coba!
-                        </a>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </section>
+<nav class="navbar navbar-expand-lg navbar-shrink navbar-dark fixed-top" id="mainNav">
+    <div class="container">
+      <a class="navbar-brand js-scroll-trigger" href="#page-top">tanamin</a>
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        Menu
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav text-uppercase ml-auto">
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="/">Services</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="/app">aplikasi</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+<div>
+    {% for key, value in dictionary.items %}
+        <li class="data">{{ value.name }}</li>
+        <li class="data">,</li>
+        <li class="data">{{ value.color.num }}</li>
+        <li class="data">,</li>
+        <li class="data">{{ value.color.plant }}</li>
+        <li class="data">;</li>
+    {% endfor %}
+    <h2 class="data jumlah">{{tanamans}}</h2>
+</div>
     <section class="map" id="map">
         <div class="container-map">
             <h1>Peta Persebaran Pangan Indonesia - <em>tanamin</em></h1>
@@ -100,6 +107,4 @@
 <!-- Plugin JavaScript -->
 <script src="{% static 'js/jquery.easing.js'%}"></script>
 
-<!-- Custom scripts for this template -->
-<script src="{% static 'js/agency.js' %}"></script>
     {% endblock %}
