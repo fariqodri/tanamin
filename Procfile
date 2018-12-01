@@ -1,1 +1,1 @@
-web: gunicorn tanamin.wsgi --log-file -
+web: python tanamin.py runserver 0.0.0.0:$PORT
