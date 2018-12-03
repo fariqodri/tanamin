@@ -3,6 +3,7 @@ $(document).ready(function () {
     'packages': ['geochart']
     });
     $("form").submit(event => {
+        $(".se-pre-con").fadeIn("slow");
         const r = $("#tanaman").val().split("_")
         const sliced = r.slice(1);
         const plants = ["padi", "jagung", "tebu", "kopi",
@@ -129,6 +130,7 @@ $(document).ready(function () {
 
     var options = {
         region: 'ID',
+        legend: 'none',
         displayMode: 'regions',
         resolution: 'provinces',
         colorAxis: {

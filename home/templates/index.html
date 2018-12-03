@@ -47,6 +47,7 @@
     <section class="map" id="map">
         <div class="container-map">
             <h1>Peta Persebaran Pangan Indonesia - <em>tanamin</em></h1>
+            <div class="se-pre-con"></div>
             <div id="geochart" style="width: 100%;"></div>
             <p>
                 Persebaran Pangan:
@@ -104,5 +105,13 @@
 
 <!-- Plugin JavaScript -->
 <script src="{% static 'js/jquery.easing.js'%}"></script>
-
-    {% endblock %}
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
+<script>
+$(window).load(function() {
+		// Animate loader off screen
+		$(".se-pre-con").fadeOut("slow");;
+	});
+</script>
+	
+ {% endblock %}
