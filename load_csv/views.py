@@ -26,7 +26,6 @@ def load(request):
       pro = Province(name=name, area=area)
       pro.save()
     for name, area, neighbors in province_with_areas:
-      print(neighbors.split(", "))
       for ngbr_name in neighbors.split(", "):
         curr = Province.objects.get(name=name)
         if ngbr_name != "":
