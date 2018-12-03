@@ -110,7 +110,7 @@ class LocalSearch:
 			if prev_confs <= confs:
 				same_times += 1
 
-			if same_times >= 100:
+			if same_times >= 50:
 					return current, confs
 			prev_confs = confs
 			var = conflicts[random.randint(0, len(conflicts) - 1)]
