@@ -3,16 +3,41 @@ $(document).ready(function () {
     'packages': ['geochart']
     });
     $("form").submit(event => {
-        r = $("#tanaman").val().split("_");
-        size = parseInt(r[0]);
-        if (size < 3 || size > 6) {
+        const r = $("#tanaman").val().split("_")
+        const sliced = r.slice(1);
+        const plants = ["padi", "jagung", "tebu", "kopi",
+                        "teh", "kelapa sawit", "cengkeh", "tembakau"]
+        
+        for (var i = 0; i < sliced.length; i++){
+            if (!(plants.includes(sliced[i].toLowerCase()))){
+                console.log(sliced[i].toLowerCase())
+                event.preventDefault();
+                alert("Tanaman tidak bisa dimasukkan.")
+                break;
+            }
+        }
+
+        if (sliced.length < 3 || sliced.length > 6) {
             event.preventDefault();
             alert("Jumlah tidak sesuai (3 sampai 6)");
         }
-        else if (r.slice(1).length != size) {
+        else if (r.slice(1).length != r[0]) {
             event.preventDefault();
             alert("Berikan jumlah tanaman yang tepat sesuai input")
         }
+        
+        // else {
+        //     for (var i; i < sliced.length; i++) {
+        //         console.log(tanamans);
+                
+        //         if (sliced[i] in tanamans) {
+        //             event.preventDefault()
+        //             alert("Ada tanaman yang sama")
+        //         }else {
+        //             tanamans.push(sliced[i])
+        //         }
+        //     }
+        // }
     });
     var namaDaerah = $(".data").text();
     var newND = namaDaerah.split(";");
@@ -56,6 +81,8 @@ $(document).ready(function () {
     function drawRegionsMap() {
     
     console.log(hasil)
+
+    
 
     var data = google.visualization.arrayToDataTable([
         ['Provinsi', 'Value', {
@@ -106,7 +133,7 @@ $(document).ready(function () {
         displayMode: 'regions',
         resolution: 'provinces',
         colorAxis: {
-            colors: ['#107895', '#EBC844', '#F58A4B', '#92A660', '#F44242', '#BE41f4'],
+            colors: ['#724C9F', '#FFC60B', '#F58A4B', '#0EB99E', '#EF426D', '#AEA1A4'],
             values: [1, 2, 3, 4, 5, 6]
         },
         backgroundColor: {
