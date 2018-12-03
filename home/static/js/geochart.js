@@ -125,7 +125,6 @@ $(document).ready(function () {
         hasil[30],
         hasil[31],
         hasil[32],
-        hasil[33],
     ]);
 
     var options = {
