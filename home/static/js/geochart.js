@@ -4,28 +4,57 @@ $(document).ready(function () {
     });
     $("form").submit(event => {
         $(".se-pre-con").fadeIn("slow");
-        const r = $("#tanaman").val().split("_")
-        const sliced = r.slice(1);
+
+        const rr = [];
+        if (document.getElementById('defaultCheck1').checked){
+            rr.push($('#defaultCheck1').val())
+        }
+        if (document.getElementById('defaultCheck2').checked){
+            rr.push($('#defaultCheck2').val())
+        }
+        if (document.getElementById('defaultCheck3').checked){
+            rr.push($('#defaultCheck3').val())
+        }
+        if (document.getElementById('defaultCheck4').checked){
+            rr.push($('#defaultCheck4').val())
+        }
+        if (document.getElementById('defaultCheck5').checked){
+            rr.push($('#defaultCheck5').val())
+        }
+        if (document.getElementById('defaultCheck6').checked){
+            rr.push($('#defaultCheck6').val())
+        }
+        if (document.getElementById('defaultCheck7').checked){
+            rr.push($('#defaultCheck7').val())
+        }
+        if (document.getElementById('defaultCheck8').checked){
+            rr.push($('#defaultCheck8').val())
+        }
+        // console.log(rr);
+        // const r = $("#tanaman").val().split("_")
+        // console.log(r);
+        // const sliced = r.slice(1);
+        // console.log(sliced);
         const plants = ["padi", "jagung", "tebu", "kopi",
                         "teh", "kelapa sawit", "cengkeh", "tembakau"]
         
-        for (var i = 0; i < sliced.length; i++){
-            if (!(plants.includes(sliced[i].toLowerCase()))){
-                console.log(sliced[i].toLowerCase())
+        for (var i = 0; i < rr.length; i++){
+            if (!(plants.includes(rr[i].toLowerCase()))){
+                console.log(rr[i].toLowerCase())
                 event.preventDefault();
                 alert("Tanaman tidak bisa dimasukkan.")
                 break;
             }
         }
 
-        if (sliced.length < 3 || sliced.length > 6) {
+        if (rr.length < 3 || rr.length > 6) {
             event.preventDefault();
             alert("Jumlah tidak sesuai (3 sampai 6)");
         }
-        else if (r.slice(1).length != r[0]) {
-            event.preventDefault();
-            alert("Berikan jumlah tanaman yang tepat sesuai input")
-        }
+        // else if rr.length != r[0]) {
+        //     event.preventDefault();
+        //     alert("Berikan jumlah tanaman yang tepat sesuai input")
+        // }
         
         // else {
         //     for (var i; i < sliced.length; i++) {
@@ -42,8 +71,6 @@ $(document).ready(function () {
     });
     var namaDaerah = $(".data").text();
     var newND = namaDaerah.split(";");
-    console.log($(".jumlah").val());
-    
     var hasil = []
     for (var i = 0; i < newND.length-1;i++){
         var tmp = newND[i].split(",");
@@ -80,11 +107,6 @@ $(document).ready(function () {
     google.charts.setOnLoadCallback(drawRegionsMap);
 
     function drawRegionsMap() {
-    
-    console.log(hasil)
-
-    
-
     var data = google.visualization.arrayToDataTable([
         ['Provinsi', 'Value', {
             role: 'tooltip',
@@ -140,7 +162,7 @@ $(document).ready(function () {
         backgroundColor: {
             fill: '#FFFFFF'
         },
-        keepAspectRatio: false,
+        keepAspectRatio: true,
     };
 
     var chart = new google.visualization.GeoChart(document.getElementById('geochart'));

@@ -14,25 +14,26 @@
 
 {% endblock %}
 {% block content %}
+<div class="se-pre-con"></div>
 <nav class="navbar navbar-expand-lg navbar-shrink navbar-dark fixed-top" id="mainNav">
     <div class="container">
-      <a class="navbar-brand js-scroll-trigger" href="/">tanamin</a>
-      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <a class="navbar-brand js-scroll-trigger" href="/">tanamin</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         Menu
-        <i class="fas fa-bars"></i>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <i class="fa fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav text-uppercase ml-auto">
-          <li class="nav-item">
+            <li class="nav-item">
             <a class="nav-link js-scroll-trigger" href="/">Home</a>
-          </li>
-          <li class="nav-item">
+            </li>
+            <li class="nav-item">
             <a class="nav-link js-scroll-trigger" href="/app">aplikasi</a>
-          </li>
+            </li>
         </ul>
-      </div>
+        </div>
     </div>
-  </nav>
+</nav>
 <div>
     {% for key, value in dictionary.items %}
         <li class="data">{{ value.name }}</li>
@@ -44,31 +45,18 @@
     {% endfor %}
     <h2 class="data jumlah">{{tanamans}}</h2>
 </div>
-    <section class="map" id="map">
-        <div class="container-map">
-            <h1>Peta Persebaran Pangan Indonesia - <em>tanamin</em></h1>
-            <div class="se-pre-con"></div>
-            <div id="geochart" style="width: 100%;"></div>
-            <p>
-                Persebaran Pangan:
-            </p>
-            <p>
-                {% for key, value in luas_pangan.items %}
-                    {{key}}: {{ value }}
-                {% endfor %}
-            </p>
-            <p>
-                Conflicts: 
-                {{conflicts}}
-            </p>
-            <div class="card">
+    <section class="map" id="map" style="margin-top: -80px;">
+        <div class="container-fluid">
+            <div class="row"> 
+                <div class="col-lg-2">
+                    <div class="card">
                 <h5 class="card-header">Form Input User</h5>
                 <div class="card-body">
                     <form action="{% url 'home:submit_tanaman' %}" method="POST">
                         {% csrf_token %}
                         <div class="form-check">
                             <div class="col-md">
-                                <small class="form-text text-muted">
+                                <!-- <small class="form-text text-muted">
                                     format: [Jumlah Jenis Tanaman]_[Jenis Tanaman 1]_[Jenis Tanaman n]
                                 </small>
                                 <small class="form-text text-danger">
@@ -80,14 +68,78 @@
                                 </small>
                                 <small class="form-text text-muted">
                                     contoh: 4_padi_tebu_jagung_teh
-                                </small>
-                                <label for="tanaman">Jumlah dan Jenis Tanaman <small>(minimal 4 jenis tanaman)</small></label>
-                                <input type="text" id="tanaman" class="form-control" name="tanamans">
-                                
+                                </small> -->
+                                <!-- <label for="tanaman">Jumlah dan Jenis Tanaman <small>(minimal 4 jenis tanaman)</small></label>
+                                <input type="text" id="tanaman" class="form-control" name="tanamans"> -->
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="tanamans" value="Cengkeh" id="defaultCheck1">
+                                    <label class="form-check-label" for="defaultCheck1">
+                                        Cengkeh
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="tanamans" value="Jagung" id="defaultCheck2">
+                                    <label class="form-check-label" for="defaultCheck2">
+                                        Jagung
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="tanamans" value="Kelapa Sawit" id="defaultCheck3">
+                                    <label class="form-check-label" for="defaultCheck3">
+                                        Kelapa Sawit
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="tanamans" value="Kopi" id="defaultCheck4">
+                                    <label class="form-check-label" for="defaultCheck4">
+                                        Kopi
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="tanamans" value="Padi" id="defaultCheck5">
+                                    <label class="form-check-label" for="defaultCheck5">
+                                        Padi
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="tanamans" value="Tebu" id="defaultCheck6">
+                                    <label class="form-check-label" for="defaultCheck6">
+                                        Tebu
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="tanamans" value="Teh" id="defaultCheck7">
+                                    <label class="form-check-label" for="defaultCheck7">
+                                        Teh
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="tanamans" value="Tembakau" id="defaultCheck8">
+                                    <label class="form-check-label" for="defaultCheck8">
+                                        Tembakau
+                                    </label>
+                                </div>
                             </div>
                         </div>
                         <button type="submit" class="btn btn-primary my-1">Submit</button>
                     </form>
+                </div>
+            </div>
+                </div>
+                <div class="col-lg-8">
+                    <div id="geochart" style="width: 100%;"></div>
+                </div>
+                <div class="col-lg-2">
+                    <ol>
+                        Persebaran Pangan:
+                        {% for key, value in luas_pangan.items %}
+                        <li>
+                            {{key}}: {{value}}
+                        </li>
+                        {% endfor %}
+                        Conflicts: 
+                        {{conflicts}}
+                    </ol>
                 </div>
             </div>
         </div>

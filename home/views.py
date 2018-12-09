@@ -9,11 +9,11 @@ def index(request):
 
 def submit_tanaman(request):
 	if request.method == 'POST':
-		input = request.POST['tanamans']
-		print(request.body)
+		input = request.POST.getlist('tanamans')
+		# print(input)
 		# form = UnknownForm()
-		jumlah = input.split("_")[0]
-		tanamans = input.split("_")[1:]
+		jumlah = len(input)
+		tanamans = input
 		colors = []
 		graph = Graph()
 		for i in range(int(jumlah)):
